@@ -2,7 +2,7 @@
 > Google Maps JavaScript API in the new Angular 2 applications using TypeScript.
 > With a sample application that implements the Geolocation and Geocoding.
 
-## Basic usage.
+## Basic usage
 Angular 2 maps includes the `google-map` and `google-map-marker` directives for viewing the map and markers, and the injectable class `maps`.
 
 This is an example of basic use:
