@@ -1,0 +1,8 @@
+{
+    "name": "angular2maps",
+    "dependencies": {},
+    "devDependencies": {},
+    "ambientDependencies": {
+        "googlemaps": "github:DefinitelyTyped/DefinitelyTyped/googlemaps/google.maps.d.ts#4ec3c5bf291bc02f49eb30c1077340b235165c67"
+    }
+}
