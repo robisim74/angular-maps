@@ -1,5 +1,5 @@
 /**
- * ANGULAR 2 MAPS.
+ * ANGULAR 2 MAPS
  * Google Maps JavaScript API in the new Angular 2 applications using TypeScript
  * written by Roberto Simonetti
  * MIT license

@@ -52,11 +52,18 @@ export class AppComponent {
      }
 }
 ```
-You must also include in your application:
-- these directives and services folders;
-- the Google Maps API load;
-- `googlemaps` TypeScript definition.
-
+You must also load the Google Maps API:
+```JavaScript
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=YOUR_API_KEY"></script>
+```
+and add the following TypeScript definition to the typings.json file:
+```json
+{
+    "ambientDependencies": {
+        "googlemaps": "github:DefinitelyTyped/DefinitelyTyped/googlemaps/google.maps.d.ts#4ec3c5bf291bc02f49eb30c1077340b235165c67"
+    }
+}
+```
 ## Running the sample app
 What you need to run this app:
 - this repository;
