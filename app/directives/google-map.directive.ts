@@ -124,7 +124,7 @@ export class GoogleMapDirective implements OnInit, OnChanges {
     ngOnInit() {
 
         // Gets the map element.
-        var el = this.elementRef.nativeElement.querySelector('#map');
+        var el: HTMLElement = this.elementRef.nativeElement.querySelector('#map');
 
         this.createMap(el);
 

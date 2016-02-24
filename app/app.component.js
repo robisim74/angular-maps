@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../directives/google-map.directive', '../directives/google-map-marker.directive', '../services/maps.service', '../services/geolocation.service', '../services/geocoding.service'], function(exports_1) {
+System.register(['angular2/core', '../app/directives/google-map.directive', '../app/directives/google-map-marker.directive', '../app/services/maps.service', '../app/services/geolocation.service', '../app/services/geocoding.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,14 +57,17 @@ System.register(['angular2/core', '../directives/google-map.directive', '../dire
                         }
                     ];
                     // Initially the marker isn't set.
+                    // Clears the search string.
+                    this.address = "";
+                    this.zeroResults = false;
                 }
                 // Tries to get the current position.
                 AppComponent.prototype.getCurrentPosition = function () {
                     var _this = this;
                     if (navigator.geolocation) {
                         // Gets the current position.
-                        this.geolocation.getCurrentPosition().subscribe(
-                        // Observer or next.
+                        this.geolocation.getCurrentPosition().forEach(
+                        // Next.
                         function (position) {
                             if (_this.center.lat() != position.coords.latitude && _this.center.lng() != position.coords.longitude) {
                                 // Sets the new center map & zoom.
@@ -72,52 +75,28 @@ System.register(['angular2/core', '../directives/google-map.directive', '../dire
                                 _this.center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                                 _this.zoom = 11;
                                 // Translates the location into address.
-                                _this.geocoding.geocode(_this.center).subscribe(
-                                // Observer or next.
+                                _this.geocoding.geocode(_this.center).forEach(
+                                // Next.
                                 function (results) {
                                     // Sets the marker to the center map.
                                     _this.setMarker(_this.center, "Your locality", results[0].formatted_address);
-                                }, 
-                                // Error.
-                                function (status) {
-                                    console.log('Geocoding service: Geocoder failed due to: ' + status);
-                                }, 
-                                // Complete.
-                                function () { console.log('Geocoding service: Completed.'); });
+                                }, null).then(function () { return console.log('Geocoding service: completed.'); });
                             }
-                        }, 
-                        // Error.
-                        function (error) {
-                            var message = '';
-                            switch (error.code) {
-                                case error.PERMISSION_DENIED:
-                                    message = 'Permission denied.';
-                                    break;
-                                case error.POSITION_UNAVAILABLE:
-                                    message = 'Position unavailable.';
-                                    break;
-                                case error.TIMEOUT:
-                                    message = 'Position timeout.';
-                                    break;
-                            }
-                            console.log('Geolocation service: ' + message);
-                        }, 
-                        // Complete.
-                        function () { console.log('Geolocation service: Completed.'); });
+                        }, null).then(function () { return console.log('Geolocation service: completed.'); });
                     }
                     else {
                         // Browser doesn't support geolocation.
-                        console.log('Geolocation service: Browser doesn\'t support geolocation.');
+                        console.log('Geolocation service: browser doesn\'t support geolocation.');
                     }
                 };
                 // Searches the address. 
                 AppComponent.prototype.search = function (address) {
                     var _this = this;
                     if (address != null) {
+                        this.zeroResults = false;
                         // Converts the address into geographic coordinates.
-                        var source = this.geocoding.codeAddress(address);
-                        var subscription = source.subscribe(
-                        // Observer or next.
+                        this.geocoding.codeAddress(address).forEach(
+                        // Next.
                         function (results) {
                             if (!_this.center.equals(results[0].geometry.location)) {
                                 // Sets the new center map & zoom.
@@ -127,20 +106,15 @@ System.register(['angular2/core', '../directives/google-map.directive', '../dire
                                 // Sets the marker to the center map.
                                 _this.setMarker(_this.center, "Search result", results[0].formatted_address);
                             }
-                        }, 
-                        // Error.
-                        function (status) {
-                            console.log('Geocoding service: Geocode was not successful for the following reason: ' + status);
-                        }, 
-                        // Complete.
-                        function () { console.log('Geocoding service: Completed.'); });
-                        // The observer will stop listening to the observable for data,
-                        // because the source observable sequence has a longer life span than the observer.             
-                        setTimeout(function () {
-                            subscription.unsubscribe();
-                            // Clear the search string.
+                        }, null).then(function () {
+                            // Clears the search string.
                             _this.address = "";
-                        }, 500);
+                            console.log('Geocoding service: completed.');
+                        }).catch(function (status) {
+                            if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
+                                _this.zeroResults = true;
+                            }
+                        });
                     }
                 };
                 // Sets the marker & the info window.

@@ -10,8 +10,8 @@
         "noImplicitAny": false
     },
     "exclude": [
-        "typings/main.d.ts",
+        "node_modules",
         "typings/main",
-        "node_modules"
+        "typings/main.d.ts"
     ]
 }

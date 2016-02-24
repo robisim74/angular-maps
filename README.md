@@ -1,11 +1,15 @@
 # Angular 2 Maps
 > Google Maps JavaScript API in the new Angular 2 applications using TypeScript.
-> With a sample application that implements the Geolocation and Geocoding.
+
+## Sample application
+Sample application that implements the Geolocation and Geocoding: [demo](http://robisim74.github.io/angular2maps)
 
 ## Basic usage
-Angular 2 maps includes the `google-map` and `google-map-marker` directives for viewing the map and markers, and the injectable class `maps`.
+Include in your application:
+* the `google-map` and `google-map-marker` directives for viewing the map and markers;
+* the `maps` service;
 
-This is an example of basic use:
+and set the map properties:
 ```TypeScript
 import {Component} from 'angular2/core';
 // Directives.
@@ -52,11 +56,11 @@ export class AppComponent {
      }
 }
 ```
-You must also load the Google Maps API:
+Load the Google Maps API:
 ```JavaScript
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=YOUR_API_KEY"></script>
 ```
-and add the following TypeScript definition to the typings.json file:
+Add the following TypeScript definition to the typings.json file:
 ```json
 {
     "ambientDependencies": {
@@ -65,17 +69,19 @@ and add the following TypeScript definition to the typings.json file:
 }
 ```
 ## Running the sample app
-What you need to run this app:
-- this repository;
-- [Node and npm](https://nodejs.org), [Typings](https://github.com/typings/typings) already installed.
+What you need to run the sample app:
+* this repository;
+* [Node and npm](https://nodejs.org), [Typings](https://github.com/typings/typings) already installed.
 
-In the command-prompt, go to the directory that contains `index.html`:
+In the command-prompt/terminal, go to the directory that contains `index.html`:
 ```
 npm install
-
 typings install
-
+gulp
+```
+You need a static server as lite-server:
+```
 npm install -g lite-server
 lite-server
 ```
-and then in a browser, visit `localhost:3000/index.html`.
+and then in a browser visit `localhost:3000/index.html`.

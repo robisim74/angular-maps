@@ -1,13 +1,11 @@
 import {Component} from 'angular2/core';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
 // Directives.
-import {GoogleMapDirective} from '../directives/google-map.directive';
-import {GoogleMapMarkerDirective} from '../directives/google-map-marker.directive';
+import {GoogleMapDirective} from '../app/directives/google-map.directive';
+import {GoogleMapMarkerDirective} from '../app/directives/google-map-marker.directive';
 // Services.
-import {MapsService} from '../services/maps.service';
-import {GeolocationService} from '../services/geolocation.service';
-import {GeocodingService} from '../services/geocoding.service';
+import {MapsService} from '../app/services/maps.service';
+import {GeolocationService} from '../app/services/geolocation.service';
+import {GeocodingService} from '../app/services/geocoding.service';
 
 @Component({
     selector: 'app-component',
@@ -46,6 +44,9 @@ export class AppComponent {
     // Address to be searched.
     address: string;
 
+    // Flag for zero results found.
+    zeroResults: boolean;
+
     constructor(public maps: MapsService, private geolocation: GeolocationService, private geocoding: GeocodingService) {
         
         // Sets initial center map.
@@ -73,6 +74,11 @@ export class AppComponent {
         
         // Initially the marker isn't set.
 
+        // Clears the search string.
+        this.address = "";
+
+        this.zeroResults = false;
+
     }
     
     // Tries to get the current position.
@@ -81,9 +87,9 @@ export class AppComponent {
         if (navigator.geolocation) {
             
             // Gets the current position.
-            this.geolocation.getCurrentPosition().subscribe(
+            this.geolocation.getCurrentPosition().forEach(
 
-                // Observer or next.
+                // Next.
                 (position: Position) => {
 
                     if (this.center.lat() != position.coords.latitude && this.center.lng() != position.coords.longitude) {
@@ -94,61 +100,28 @@ export class AppComponent {
                         this.zoom = 11;
 
                         // Translates the location into address.
-                        this.geocoding.geocode(this.center).subscribe(
+                        this.geocoding.geocode(this.center).forEach(
                 
-                            // Observer or next.
+                            // Next.
                             (results: google.maps.GeocoderResult[]) => {
 
                                 // Sets the marker to the center map.
                                 this.setMarker(this.center, "Your locality", results[0].formatted_address);
 
-                            },
-            
-                            // Error.
-                            (status: google.maps.GeocoderStatus) => {
+                            }, null
 
-                                console.log('Geocoding service: Geocoder failed due to: ' + status);
-
-                            },
-                            
-                            // Complete.
-                            () => { console.log('Geocoding service: Completed.'); }
-
-                        )
+                        ).then(() => console.log('Geocoding service: completed.'));
 
                     }
 
-                },
-                
-                // Error.
-                (error: PositionError) => {
+                }, null
 
-                    var message: string = '';
-
-                    switch (error.code) {
-                        case error.PERMISSION_DENIED:
-                            message = 'Permission denied.';
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            message = 'Position unavailable.';
-                            break;
-                        case error.TIMEOUT:
-                            message = 'Position timeout.';
-                            break;
-                    }
-
-                    console.log('Geolocation service: ' + message);
-                },
-                
-                // Complete.
-                () => { console.log('Geolocation service: Completed.'); }
-
-            );
+            ).then(() => console.log('Geolocation service: completed.'));
 
         } else {
 
             // Browser doesn't support geolocation.
-            console.log('Geolocation service: Browser doesn\'t support geolocation.');
+            console.log('Geolocation service: browser doesn\'t support geolocation.');
         }
 
     }
@@ -158,12 +131,12 @@ export class AppComponent {
 
         if (address != null) {
 
-            // Converts the address into geographic coordinates.
-            var source: Observable<any> = this.geocoding.codeAddress(address);
+            this.zeroResults = false;
 
-            var subscription: Subscription = source.subscribe(
-                           
-                // Observer or next.
+            // Converts the address into geographic coordinates.
+            this.geocoding.codeAddress(address).forEach(
+
+                // Next.
                 (results: google.maps.GeocoderResult[]) => {
 
                     if (!this.center.equals(results[0].geometry.location)) {
@@ -178,30 +151,30 @@ export class AppComponent {
 
                     }
 
-                },
-            
-                // Error.
+                }, null
+
+            ).then(
+
+                () => {
+                
+                    // Clears the search string.
+                    this.address = "";
+
+                    console.log('Geocoding service: completed.');
+
+                }
+
+                ).catch(
+
                 (status: google.maps.GeocoderStatus) => {
 
-                    console.log('Geocoding service: Geocode was not successful for the following reason: ' + status);
+                    if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
 
-                },
+                        this.zeroResults = true;
 
-                // Complete.
-                () => { console.log('Geocoding service: Completed.'); }
+                    }
 
-            );
-
-            // The observer will stop listening to the observable for data,
-            // because the source observable sequence has a longer life span than the observer.             
-            setTimeout(() => {
-
-                subscription.unsubscribe();
-                
-                // Clear the search string.
-                this.address = "";
-
-            }, 500);
+                });
 
         }
 

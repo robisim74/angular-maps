@@ -42,20 +42,22 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                  * Wraps the Google Maps API geocoding service into an observable.
                  *
                  * @param latLng Location
+                 * @return An observable of GeocoderResult
                  */
                 GeocodingService.prototype.geocode = function (latLng) {
                     var _this = this;
                     return new Observable_1.Observable(function (observer) {
                         // Invokes geocode method of Google Maps API geocoding.
                         _this.geocoder.geocode({ 'location': latLng }, (
-                        // Results.
-                        // Results.
+                        // Results & status.
+                        // Results & status.
                         function (results, status) {
                             if (status === google.maps.GeocoderStatus.OK) {
                                 observer.next(results);
                                 observer.complete();
                             }
                             else {
+                                console.log('Geocoding service: geocoder failed due to: ' + status);
                                 observer.error(status);
                             }
                         }));
@@ -67,20 +69,22 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                  * Wraps the Google Maps API geocoding service into an observable.
                  *
                  * @param address The address to be searched
+                 * @return An observable of GeocoderResult
                  */
                 GeocodingService.prototype.codeAddress = function (address) {
                     var _this = this;
                     return new Observable_1.Observable(function (observer) {
                         // Invokes geocode method of Google Maps API geocoding.
                         _this.geocoder.geocode({ 'address': address }, (
-                        // Results.
-                        // Results.
+                        // Results & status.
+                        // Results & status.
                         function (results, status) {
                             if (status === google.maps.GeocoderStatus.OK) {
                                 observer.next(results);
                                 observer.complete();
                             }
                             else {
+                                console.log('Geocoding service: geocode was not successful for the following reason: ' + status);
                                 observer.error(status);
                             }
                         }));

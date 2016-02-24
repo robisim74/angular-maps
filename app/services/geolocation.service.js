@@ -38,7 +38,9 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                 /**
                  * Tries HTML5 geolocation.
                  *
-                 * Wrap the Geolocation API into an observable.
+                 * Wraps the Geolocation API into an observable.
+                 *
+                 * @return An observable of Position
                  */
                 GeolocationService.prototype.getCurrentPosition = function () {
                     return new Observable_1.Observable(function (observer) {
@@ -51,6 +53,19 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                         }, 
                         // Error callback.
                         function (error) {
+                            var message = '';
+                            switch (error.code) {
+                                case error.PERMISSION_DENIED:
+                                    message = 'permission denied.';
+                                    break;
+                                case error.POSITION_UNAVAILABLE:
+                                    message = 'position unavailable.';
+                                    break;
+                                case error.TIMEOUT:
+                                    message = 'position timeout.';
+                                    break;
+                            }
+                            console.log('Geolocation service: ' + message);
                             observer.error(error);
                         });
                     });

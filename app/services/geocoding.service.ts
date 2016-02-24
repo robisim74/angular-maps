@@ -35,15 +35,16 @@ import {Observable} from 'rxjs/Observable';
      * Wraps the Google Maps API geocoding service into an observable.
      * 
      * @param latLng Location
+     * @return An observable of GeocoderResult
      */
-    geocode(latLng: google.maps.LatLng): Observable<any> {
+    geocode(latLng: google.maps.LatLng): Observable<google.maps.GeocoderResult[]> {
 
-        return new Observable((observer: Observer<any>) => {
+        return new Observable((observer: Observer<google.maps.GeocoderResult[]>) => {
 
             // Invokes geocode method of Google Maps API geocoding.
             this.geocoder.geocode({ 'location': latLng }, (
                           
-                // Results.
+                // Results & status.
                 (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
 
                     if (status === google.maps.GeocoderStatus.OK) {
@@ -52,6 +53,8 @@ import {Observable} from 'rxjs/Observable';
                         observer.complete();
 
                     } else {
+
+                        console.log('Geocoding service: geocoder failed due to: ' + status);
 
                         observer.error(status);
 
@@ -71,15 +74,16 @@ import {Observable} from 'rxjs/Observable';
      * Wraps the Google Maps API geocoding service into an observable.
      * 
      * @param address The address to be searched
+     * @return An observable of GeocoderResult
      */
-    codeAddress(address: string): Observable<any> {
+    codeAddress(address: string): Observable<google.maps.GeocoderResult[]> {
 
-        return new Observable((observer: Observer<any>) => {
+        return new Observable((observer: Observer<google.maps.GeocoderResult[]>) => {
 
             // Invokes geocode method of Google Maps API geocoding.
             this.geocoder.geocode({ 'address': address }, (
                           
-                // Results.
+                // Results & status.
                 (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
 
                     if (status === google.maps.GeocoderStatus.OK) {
@@ -88,6 +92,8 @@ import {Observable} from 'rxjs/Observable';
                         observer.complete();
 
                     } else {
+
+                        console.log('Geocoding service: geocode was not successful for the following reason: ' + status);
 
                         observer.error(status);
 

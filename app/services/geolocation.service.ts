@@ -23,11 +23,13 @@ import {Observable} from 'rxjs/Observable';
     /**
      * Tries HTML5 geolocation.
      * 
-     * Wrap the Geolocation API into an observable.
+     * Wraps the Geolocation API into an observable.
+     * 
+     * @return An observable of Position
      */
-    getCurrentPosition(): Observable<any> {
+    getCurrentPosition(): Observable<Position> {
 
-        return new Observable((observer: Observer<any>) => {
+        return new Observable((observer: Observer<Position>) => {
 
             // Invokes getCurrentPosition method of Geolocation API.
             navigator.geolocation.getCurrentPosition(
@@ -42,6 +44,22 @@ import {Observable} from 'rxjs/Observable';
                 
                 // Error callback.
                 (error: PositionError) => {
+
+                    var message: string = '';
+
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            message = 'permission denied.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            message = 'position unavailable.';
+                            break;
+                        case error.TIMEOUT:
+                            message = 'position timeout.';
+                            break;
+                    }
+
+                    console.log('Geolocation service: ' + message);
 
                     observer.error(error);
 
