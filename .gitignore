@@ -1,3 +1,4 @@
 $ cat .gitignore
 /node_modules
 /typings
+/dist
