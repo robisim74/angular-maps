@@ -29,6 +29,7 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
             /**
              * GeolocationService class.
              * https://developers.google.com/maps/documentation/javascript/
+             * https://dev.w3.org/geo/api/spec-source.html
              *
              * @author Roberto Simonetti
              */
@@ -53,19 +54,7 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                         }, 
                         // Error callback.
                         function (error) {
-                            var message = '';
-                            switch (error.code) {
-                                case error.PERMISSION_DENIED:
-                                    message = 'permission denied.';
-                                    break;
-                                case error.POSITION_UNAVAILABLE:
-                                    message = 'position unavailable.';
-                                    break;
-                                case error.TIMEOUT:
-                                    message = 'position timeout.';
-                                    break;
-                            }
-                            console.log('Geolocation service: ' + message);
+                            console.log('Geolocation service: ' + error.message);
                             observer.error(error);
                         });
                     });

@@ -22,9 +22,9 @@
 
             <div class="col-sm-6">
 
-                <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="zeroResults">
+                <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="warning">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Warning!</strong> Zero results!
+                    <strong>warning!</strong> {{ message }}
                 </div>
 
                 <!--these properties are required: center, zoom-->

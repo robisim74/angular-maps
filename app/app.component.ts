@@ -44,8 +44,9 @@ export class AppComponent {
     // Address to be searched.
     address: string;
 
-    // Flag for zero results found.
-    zeroResults: boolean;
+    // Warning flag & message.
+    warning: boolean;
+    message: string;
 
     constructor(public maps: MapsService, private geolocation: GeolocationService, private geocoding: GeocodingService) {
         
@@ -77,12 +78,16 @@ export class AppComponent {
         // Clears the search string.
         this.address = "";
 
-        this.zeroResults = false;
+        this.warning = false;
+        this.message = "";
 
     }
     
     // Tries to get the current position.
     getCurrentPosition() {
+
+        this.warning = false;
+        this.message = "";
 
         if (navigator.geolocation) {
             
@@ -106,7 +111,7 @@ export class AppComponent {
                             (results: google.maps.GeocoderResult[]) => {
 
                                 // Sets the marker to the center map.
-                                this.setMarker(this.center, "Your locality", results[0].formatted_address);
+                                this.setMarker(this.center, "your locality", results[0].formatted_address);
 
                             }, null
 
@@ -116,12 +121,36 @@ export class AppComponent {
 
                 }, null
 
-            ).then(() => console.log('Geolocation service: completed.'));
+            ).then(() => console.log('Geolocation service: completed.')).catch(
+
+                (error: PositionError) => {
+
+                    if (error.code > 0) {
+
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                this.message = 'permission denied';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                this.message = 'position unavailable';
+                                break;
+                            case error.TIMEOUT:
+                                this.message = 'position timeout';
+                                break;
+                        }
+
+                        this.warning = true;
+
+                    }
+
+                });
 
         } else {
 
             // Browser doesn't support geolocation.
-            console.log('Geolocation service: browser doesn\'t support geolocation.');
+            this.message = "browser doesn't support geolocation";
+            this.warning = true;
+
         }
 
     }
@@ -129,9 +158,10 @@ export class AppComponent {
     // Searches the address. 
     search(address: string) {
 
-        if (address != null) {
+        if (address != "") {
 
-            this.zeroResults = false;
+            this.warning = false;
+            this.message = "";
 
             // Converts the address into geographic coordinates.
             this.geocoding.codeAddress(address).forEach(
@@ -147,7 +177,7 @@ export class AppComponent {
                         this.zoom = 11;
                     
                         // Sets the marker to the center map.
-                        this.setMarker(this.center, "Search result", results[0].formatted_address);
+                        this.setMarker(this.center, "search result", results[0].formatted_address);
 
                     }
 
@@ -168,9 +198,11 @@ export class AppComponent {
 
                 (status: google.maps.GeocoderStatus) => {
 
+                    // Zero results.
                     if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
 
-                        this.zeroResults = true;
+                        this.message = "zero results";
+                        this.warning = true;
 
                     }
 

@@ -59,11 +59,14 @@ System.register(['angular2/core', '../app/directives/google-map.directive', '../
                     // Initially the marker isn't set.
                     // Clears the search string.
                     this.address = "";
-                    this.zeroResults = false;
+                    this.warning = false;
+                    this.message = "";
                 }
                 // Tries to get the current position.
                 AppComponent.prototype.getCurrentPosition = function () {
                     var _this = this;
+                    this.warning = false;
+                    this.message = "";
                     if (navigator.geolocation) {
                         // Gets the current position.
                         this.geolocation.getCurrentPosition().forEach(
@@ -79,21 +82,38 @@ System.register(['angular2/core', '../app/directives/google-map.directive', '../
                                 // Next.
                                 function (results) {
                                     // Sets the marker to the center map.
-                                    _this.setMarker(_this.center, "Your locality", results[0].formatted_address);
+                                    _this.setMarker(_this.center, "your locality", results[0].formatted_address);
                                 }, null).then(function () { return console.log('Geocoding service: completed.'); });
                             }
-                        }, null).then(function () { return console.log('Geolocation service: completed.'); });
+                        }, null).then(function () { return console.log('Geolocation service: completed.'); }).catch(function (error) {
+                            if (error.code > 0) {
+                                switch (error.code) {
+                                    case error.PERMISSION_DENIED:
+                                        _this.message = 'permission denied';
+                                        break;
+                                    case error.POSITION_UNAVAILABLE:
+                                        _this.message = 'position unavailable';
+                                        break;
+                                    case error.TIMEOUT:
+                                        _this.message = 'position timeout';
+                                        break;
+                                }
+                                _this.warning = true;
+                            }
+                        });
                     }
                     else {
                         // Browser doesn't support geolocation.
-                        console.log('Geolocation service: browser doesn\'t support geolocation.');
+                        this.message = "browser doesn't support geolocation";
+                        this.warning = true;
                     }
                 };
                 // Searches the address. 
                 AppComponent.prototype.search = function (address) {
                     var _this = this;
-                    if (address != null) {
-                        this.zeroResults = false;
+                    if (address != "") {
+                        this.warning = false;
+                        this.message = "";
                         // Converts the address into geographic coordinates.
                         this.geocoding.codeAddress(address).forEach(
                         // Next.
@@ -104,15 +124,17 @@ System.register(['angular2/core', '../app/directives/google-map.directive', '../
                                 _this.center = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
                                 _this.zoom = 11;
                                 // Sets the marker to the center map.
-                                _this.setMarker(_this.center, "Search result", results[0].formatted_address);
+                                _this.setMarker(_this.center, "search result", results[0].formatted_address);
                             }
                         }, null).then(function () {
                             // Clears the search string.
                             _this.address = "";
                             console.log('Geocoding service: completed.');
                         }).catch(function (status) {
+                            // Zero results.
                             if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
-                                _this.zeroResults = true;
+                                _this.message = "zero results";
+                                _this.warning = true;
                             }
                         });
                     }
