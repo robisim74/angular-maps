@@ -60,7 +60,7 @@ Load the Google Maps API:
 ```JavaScript
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=YOUR_API_KEY"></script>
 ```
-Add the following TypeScript definition to the typings.json file:
+Add the following TypeScript definition to the `typings.json` file:
 ```json
 {
     "ambientDependencies": {
@@ -73,13 +73,13 @@ What you need to run the sample app:
 * this repository;
 * [Node and npm](https://nodejs.org), [Typings](https://github.com/typings/typings) already installed.
 
-In the command-prompt/terminal, go to the directory that contains `index.html`:
+In the command line, go to the directory that contains `index.html`:
 ```
 npm install
 typings install
 gulp
 ```
-You need a static server as lite-server:
+You need a static server as [lite-server](https://github.com/johnpapa/lite-server):
 ```
 npm install -g lite-server
 lite-server
