@@ -41,7 +41,7 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                  *
                  * Wraps the Google Maps API geocoding service into an observable.
                  *
-                 * @param latLng Location
+                 * @params latLng Location
                  * @return An observable of GeocoderResult
                  */
                 GeocodingService.prototype.geocode = function (latLng) {
@@ -68,7 +68,7 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                  *
                  * Wraps the Google Maps API geocoding service into an observable.
                  *
-                 * @param address The address to be searched
+                 * @params address The address to be searched
                  * @return An observable of GeocoderResult
                  */
                 GeocodingService.prototype.codeAddress = function (address) {

@@ -41,8 +41,8 @@ System.register(['angular2/core'], function(exports_1) {
                 /**
                  * Creates a new map inside of the given HTML container.
                  *
-                 * @param el DIV element
-                 * @param mapOptions MapOptions object specification
+                 * @params el DIV element
+                 * @params mapOptions MapOptions object specification
                  */
                 MapsService.prototype.initMap = function (el, mapOptions) {
                     var _this = this;
@@ -65,7 +65,7 @@ System.register(['angular2/core'], function(exports_1) {
                 /**
                  * Sets the center map.
                  *
-                 * @param latLng The center map
+                 * @params latLng The center map
                  */
                 MapsService.prototype.setCenter = function (latLng) {
                     if (this.map != null && latLng != null) {
@@ -76,7 +76,7 @@ System.register(['angular2/core'], function(exports_1) {
                 /**
                  * Sets zoom.
                  *
-                 * @param zoom
+                 * @params zoom
                  */
                 MapsService.prototype.setZoom = function (zoom) {
                     if (this.map != null) {
@@ -86,9 +86,9 @@ System.register(['angular2/core'], function(exports_1) {
                 /**
                  * Adds a marker.
                  *
-                 * @param latLng Marker position
-                 * @param title Tooltip
-                 * @param contentString InfoWindow' content
+                 * @params latLng Marker position
+                 * @params title Tooltip
+                 * @params contentString InfoWindow' content
                  */
                 MapsService.prototype.addMarker = function (latLng, title, contentString) {
                     if (this.map != null && latLng != null) {

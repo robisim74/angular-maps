@@ -33,8 +33,8 @@ import {Injectable} from 'angular2/core';
     /**
      * Creates a new map inside of the given HTML container.
      * 
-     * @param el DIV element
-     * @param mapOptions MapOptions object specification
+     * @params el DIV element
+     * @params mapOptions MapOptions object specification
      */
     initMap(el: HTMLElement, mapOptions: any) {
 
@@ -65,7 +65,7 @@ import {Injectable} from 'angular2/core';
     /**
      * Sets the center map.
      * 
-     * @param latLng The center map
+     * @params latLng The center map
      */
     setCenter(latLng: google.maps.LatLng) {
 
@@ -81,7 +81,7 @@ import {Injectable} from 'angular2/core';
     /**
      * Sets zoom.
      * 
-     * @param zoom
+     * @params zoom
      */
     setZoom(zoom: number) {
 
@@ -96,9 +96,9 @@ import {Injectable} from 'angular2/core';
     /**
      * Adds a marker.
      * 
-     * @param latLng Marker position
-     * @param title Tooltip
-     * @param contentString InfoWindow' content
+     * @params latLng Marker position
+     * @params title Tooltip
+     * @params contentString InfoWindow' content
      */
     addMarker(latLng: google.maps.LatLng, title?: string, contentString?: string) {
 
