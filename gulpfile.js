@@ -1,14 +1,20 @@
 // Plug-ins.
-const gulp = require('gulp');
-const del = require('del');
+var gulp = require('gulp'),
+    del = require('del');
 
-// Cleans the contents of the distribution directory.
-gulp.task('clean', function () {
-    return del('dist/**/*');
+// Script paths.
+var dest = 'dist';
+
+// Clean task: cleans the contents of the distribution directory.
+gulp.task('clean', function() {
+
+    return del(dest);
+
 });
 
-// Copies dependencies.
-gulp.task('copy:libs', ['clean'], function () {
+// Copy task: copies dependencies.
+gulp.task('copy:libs', ['clean'], function() {
+
     return gulp.src([
         'node_modules/es6-shim/es6-shim.min.js',
         'node_modules/systemjs/dist/system-polyfills.js',
@@ -18,6 +24,7 @@ gulp.task('copy:libs', ['clean'], function () {
         'node_modules/angular2/bundles/angular2.dev.js'
     ])
         .pipe(gulp.dest('dist/lib'))
+
 });
 
 gulp.task('default', ['copy:libs']);

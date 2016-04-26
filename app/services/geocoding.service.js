@@ -5,7 +5,9 @@
  * MIT license
  * https://github.com/robisim74/angular2maps
  */
-System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
+System.register(['angular2/core', 'rxjs/Observable'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41,7 +43,7 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                  *
                  * Wraps the Google Maps API geocoding service into an observable.
                  *
-                 * @params latLng Location
+                 * @param latLng Location
                  * @return An observable of GeocoderResult
                  */
                 GeocodingService.prototype.geocode = function (latLng) {
@@ -68,7 +70,7 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                  *
                  * Wraps the Google Maps API geocoding service into an observable.
                  *
-                 * @params address The address to be searched
+                 * @param address The address to be searched
                  * @return An observable of GeocoderResult
                  */
                 GeocodingService.prototype.codeAddress = function (address) {
@@ -95,7 +97,7 @@ System.register(['angular2/core', 'rxjs/Observable'], function(exports_1) {
                     __metadata('design:paramtypes', [])
                 ], GeocodingService);
                 return GeocodingService;
-            })();
+            }());
             exports_1("GeocodingService", GeocodingService);
         }
     }

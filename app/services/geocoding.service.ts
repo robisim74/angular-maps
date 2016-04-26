@@ -34,7 +34,7 @@ import {Observable} from 'rxjs/Observable';
      * 
      * Wraps the Google Maps API geocoding service into an observable.
      * 
-     * @params latLng Location
+     * @param latLng Location
      * @return An observable of GeocoderResult
      */
     geocode(latLng: google.maps.LatLng): Observable<google.maps.GeocoderResult[]> {
@@ -73,7 +73,7 @@ import {Observable} from 'rxjs/Observable';
      * 
      * Wraps the Google Maps API geocoding service into an observable.
      * 
-     * @params address The address to be searched
+     * @param address The address to be searched
      * @return An observable of GeocoderResult
      */
     codeAddress(address: string): Observable<google.maps.GeocoderResult[]> {
