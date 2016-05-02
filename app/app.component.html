@@ -6,7 +6,7 @@
         <div class="container">
 
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">angular 2 maps</a>
+                <a class="navbar-brand" href="#">Angular 2 Maps</a>
             </div>
 
         </div>
@@ -24,7 +24,7 @@
 
                 <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="warning">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>warning!</strong> {{ message }}
+                    <strong>Warning!</strong> {{ message }}
                 </div>
 
                 <!--these properties are required: center, zoom-->
@@ -39,9 +39,9 @@
 
                 <!--search-->
                 <div class="form-group">
-                    <label class="control-label" for="input-search">address</label>
+                    <label class="control-label" for="input-search">Address</label>
                     <div class="input-group">
-                        <input type="text" id="input-search" class="form-control" [(ngModel)]="address" (keyup.enter)="search(address)" placeholder="address">
+                        <input type="text" id="input-search" class="form-control" [(ngModel)]="address" (keyup.enter)="search(address)" placeholder="Address">
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-fab btn-fab-mini" title="search" (click)="search(address)">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -51,7 +51,7 @@
                 </div>
 
                 <!--get current position-->
-                <input class="btn btn-default btn-block" type="button" value="get current position" (click)="getCurrentPosition()">
+                <input class="btn btn-default btn-block" type="button" value="Get current position" (click)="getCurrentPosition()">
 
             </div>
 
