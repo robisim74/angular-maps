@@ -6,9 +6,9 @@
  * https://github.com/robisim74/angular2maps
  */
 
-import {Injectable} from 'angular2/core';
-import {Observer} from 'rxjs/Observer';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * GeolocationService class.
@@ -20,7 +20,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable() export class GeolocationService {
 
     constructor() { }
-    
+
     /**
      * Tries HTML5 geolocation.
      * 
@@ -34,7 +34,7 @@ import {Observable} from 'rxjs/Observable';
 
             // Invokes getCurrentPosition method of Geolocation API.
             navigator.geolocation.getCurrentPosition(
-                
+
                 // Success callback.
                 (position: Position) => {
 
@@ -42,7 +42,7 @@ import {Observable} from 'rxjs/Observable';
                     observer.complete();
 
                 },
-                
+
                 // Error callback.
                 (error: PositionError) => {
 

@@ -6,9 +6,9 @@
  * https://github.com/robisim74/angular2maps
  */
 
-import {Directive, Input, OnChanges, SimpleChange} from 'angular2/core';
+import { Directive, Input, OnChanges, SimpleChange } from '@angular/core';
 // Services.
-import {MapsService} from '../services/maps.service';
+import { MapsService } from '../services/maps.service';
 
 @Directive({
     selector: 'google-map-marker'
@@ -20,7 +20,7 @@ import {MapsService} from '../services/maps.service';
  * @author Roberto Simonetti
  */
 export class GoogleMapMarkerDirective implements OnChanges {
-    
+
     /**
      * Marker position. Required.
      */
@@ -30,7 +30,7 @@ export class GoogleMapMarkerDirective implements OnChanges {
      * The marker's title will appear as a tooltip.
      */
     @Input() title: string;
-    
+
     /**
      * An InfoWindow's content is diplayed in a popup window above the map, at a given location.
      */

@@ -6,9 +6,9 @@
  * https://github.com/robisim74/angular2maps
  */
 
-import {Injectable} from 'angular2/core';
-import {Observer} from 'rxjs/Observer';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * GeocodingService class.
@@ -17,7 +17,7 @@ import {Observable} from 'rxjs/Observable';
  * @author Roberto Simonetti
  */
 @Injectable() export class GeocodingService {
-    
+
     /**
      * Geocoder.
      */
@@ -28,7 +28,7 @@ import {Observable} from 'rxjs/Observable';
         this.geocoder = new google.maps.Geocoder();
 
     }
-    
+
     /**
      * Reverse geocoding by location.
      * 
@@ -43,7 +43,7 @@ import {Observable} from 'rxjs/Observable';
 
             // Invokes geocode method of Google Maps API geocoding.
             this.geocoder.geocode({ 'location': latLng }, (
-                          
+
                 // Results & status.
                 (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
 
@@ -67,7 +67,7 @@ import {Observable} from 'rxjs/Observable';
         });
 
     }
-    
+
     /**
      * Geocoding services.
      * 
@@ -82,7 +82,7 @@ import {Observable} from 'rxjs/Observable';
 
             // Invokes geocode method of Google Maps API geocoding.
             this.geocoder.geocode({ 'address': address }, (
-                          
+
                 // Results & status.
                 (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
 
@@ -108,4 +108,3 @@ import {Observable} from 'rxjs/Observable';
     }
 
 }
-

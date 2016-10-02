@@ -1,18 +1,15 @@
-import {Component} from 'angular2/core';
+import { Component } from '@angular/core';
 // Directives.
-import {GoogleMapDirective} from '../app/directives/google-map.directive';
-import {GoogleMapMarkerDirective} from '../app/directives/google-map-marker.directive';
+import { GoogleMapDirective } from '../app/directives/google-map.directive';
+import { GoogleMapMarkerDirective } from '../app/directives/google-map-marker.directive';
 // Services.
-import {MapsService} from '../app/services/maps.service';
-import {GeolocationService} from '../app/services/geolocation.service';
-import {GeocodingService} from '../app/services/geocoding.service';
+import { MapsService } from '../app/services/maps.service';
+import { GeolocationService } from '../app/services/geolocation.service';
+import { GeocodingService } from '../app/services/geocoding.service';
 
 @Component({
     selector: 'app-component',
-    directives: [GoogleMapDirective, GoogleMapMarkerDirective],
-    templateUrl: './app/app.component.html',
-    providers: [MapsService],
-    viewProviders: [GeolocationService, GeocodingService]
+    templateUrl: './app/app.component.html'
 })
 
 export class AppComponent {

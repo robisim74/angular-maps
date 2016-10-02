@@ -6,9 +6,9 @@
  * https://github.com/robisim74/angular2maps
  */
 
-import {Component, Input, OnInit, OnChanges, SimpleChange, ElementRef} from 'angular2/core';
+import { Component, Input, OnInit, OnChanges, SimpleChange, ElementRef } from '@angular/core';
 // Services.
-import {MapsService} from '../services/maps.service';
+import { MapsService } from '../services/maps.service';
 
 @Component({
     selector: 'google-map',
@@ -76,41 +76,41 @@ export class GoogleMapDirective implements OnInit, OnChanges {
      * Center map. Required.
      */
     @Input() center: google.maps.LatLng;
-    
+
     /*
      * MapOptions object specification.
      */
-    
+
     /**
      * The initial map zoom level. Required.
      */
     @Input() zoom: number;
-    
+
     /**
      * Enables/disables all default UI.
      */
     @Input() disableDefaultUI: boolean;
-    
+
     /**
      * Enables/disables zoom and center on double click. Enabled by default.
      */
     @Input() disableDoubleClickZoom: boolean;
-    
+
     /**
      * The initial map mapTypeId. Defaults to ROADMAP.
      */
     @Input() mapTypeId: google.maps.MapTypeId;
-    
+
     /**
      * The maximum zoom level which will be displayed on the map.
      */
     @Input() maxZoom: number;
-    
+
     /**
      * The minimum zoom level which will be displayed on the map.
      */
     @Input() minZoom: number;
-    
+
     /**
      * Styles to apply to each of the default map types.
      */

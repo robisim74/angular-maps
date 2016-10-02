@@ -6,7 +6,7 @@
  * https://github.com/robisim74/angular2maps
  */
 
-import {Injectable} from 'angular2/core';
+import { Injectable } from '@angular/core';
 
 /**
  * MapsService class.
