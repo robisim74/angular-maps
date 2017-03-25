@@ -1,5 +1,5 @@
 # Angular Maps
-> Google Maps JavaScript API in the *Angular 2+* applications using TypeScript.
+> Google Maps JavaScript API in the Angular 2+ applications using TypeScript.
 
 ## Sample app
 The sample application implements Google Maps, Markers, Geolocation and Geocoding.

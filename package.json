@@ -1,7 +1,7 @@
 {
     "name": "angular-maps",
     "version": "1.0.0",
-    "description": "Google Maps JavaScript API in the Angular 2+ applications using TypeScript",
+    "description": "Google Maps JavaScript API in the Angular applications using TypeScript",
     "main": "",
     "scripts": {
         "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
