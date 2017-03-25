@@ -1,44 +1,43 @@
 {
-    "name": "angular2maps",
+    "name": "angular-maps",
     "version": "1.0.0",
-    "description": "Google Maps JavaScript API in the new Angular 2 applications using TypeScript",
+    "description": "Google Maps JavaScript API in the Angular 2+ applications using TypeScript",
     "main": "",
     "scripts": {
         "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
         "lite": "lite-server",
-        "postinstall": "typings install",
         "tsc": "tsc",
-        "tsc:w": "tsc -w",
-        "typings": "typings"
+        "tsc:w": "tsc -w"
     },
     "keywords": [],
     "author": "Roberto Simonetti",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/robisim74/angular2maps.git"
+        "url": "https://github.com/robisim74/angular-maps.git"
     },
     "bugs": {
-        "url": "https://github.com/robisim74/angular2maps/issues"
+        "url": "https://github.com/robisim74/angular-maps/issues"
     },
-    "homepage": "https://github.com/robisim74/angular2maps",
+    "homepage": "https://github.com/robisim74/angular-maps",
     "dependencies": {
-        "@angular/common": "2.0.1",
-        "@angular/compiler": "2.0.1",
-        "@angular/core": "2.0.1",
-        "@angular/forms": "2.0.1",
-        "@angular/platform-browser": "2.0.1",
-        "@angular/platform-browser-dynamic": "2.0.1",
+        "@angular/common": "4.0.0",
+        "@angular/compiler": "4.0.0",
+        "@angular/core": "4.0.0",
+        "@angular/forms": "4.0.0",
+        "@angular/platform-browser": "4.0.0",
+        "@angular/platform-browser-dynamic": "4.0.0",
         "core-js": "2.4.1",
-        "reflect-metadata": "0.1.8",
-        "rxjs": "5.0.0-beta.12",
-        "systemjs": "0.19.39",
-        "zone.js": "0.6.25"
+        "reflect-metadata": "0.1.10",
+        "rxjs": "5.2.0",
+        "systemjs": "0.19.47",
+        "zone.js": "0.8.5"
     },
     "devDependencies": {
-        "concurrently": "3.0.0",
-        "lite-server": "2.2.2",
-        "typescript": "2.0.3",
-        "typings": "1.4.0"
+        "@types/node": "7.0.11",
+        "@types/googlemaps":"3.26.7",
+        "concurrently": "3.4.0",
+        "lite-server": "2.3.0",
+        "typescript": "2.2.1"
     }
 }

@@ -1,27 +1,17 @@
-<!--app component view-->
-
 <header>
-
     <nav class="navbar navbar-default">
         <div class="container">
-
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Angular 2 Maps</a>
+                <a class="navbar-brand" href="#">Angular Maps</a>
             </div>
-
         </div>
     </nav>
-
 </header>
 
 <main>
-
     <div class="container">
-
         <div class="row">
-
             <div class="col-sm-6">
-
                 <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="warning">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <strong>Warning!</strong> {{ message }}
@@ -29,7 +19,7 @@
 
                 <!--these properties are required: center, zoom-->
                 <google-map [center]="center" [zoom]="zoom" [disableDefaultUI]="disableDefaultUI" [disableDoubleClickZoom]="disableDoubleClickZoom"
-                [mapTypeId]="mapTypeId" [maxZoom]="maxZoom" [minZoom]="minZoom" [styles]="styles">
+                    [mapTypeId]="mapTypeId" [maxZoom]="maxZoom" [minZoom]="minZoom" [styles]="styles">
                     <!--this property is required: position-->
                     <google-map-marker [position]="position" [title]="title" [content]="content">
                     </google-map-marker>
@@ -37,7 +27,6 @@
 
                 <br>
 
-                <!--search-->
                 <div class="form-group">
                     <label class="control-label" for="input-search">Address</label>
                     <div class="input-group">
@@ -50,13 +39,8 @@
                     </div>
                 </div>
 
-                <!--get current position-->
                 <input class="btn btn-default btn-block" type="button" value="Get current position" (click)="getCurrentPosition()">
-
             </div>
-
         </div>
-
     </div>
-
 </main>
