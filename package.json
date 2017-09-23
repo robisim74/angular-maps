@@ -1,43 +1,60 @@
 {
-    "name": "angular-maps",
-    "version": "1.0.0",
-    "description": "Google Maps JavaScript API in the Angular applications using TypeScript",
-    "main": "",
-    "scripts": {
-        "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
-        "lite": "lite-server",
-        "tsc": "tsc",
-        "tsc:w": "tsc -w"
-    },
-    "keywords": [],
-    "author": "Roberto Simonetti",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/robisim74/angular-maps.git"
-    },
-    "bugs": {
-        "url": "https://github.com/robisim74/angular-maps/issues"
-    },
-    "homepage": "https://github.com/robisim74/angular-maps",
-    "dependencies": {
-        "@angular/common": "4.0.0",
-        "@angular/compiler": "4.0.0",
-        "@angular/core": "4.0.0",
-        "@angular/forms": "4.0.0",
-        "@angular/platform-browser": "4.0.0",
-        "@angular/platform-browser-dynamic": "4.0.0",
-        "core-js": "2.4.1",
-        "reflect-metadata": "0.1.10",
-        "rxjs": "5.2.0",
-        "systemjs": "0.19.47",
-        "zone.js": "0.8.5"
-    },
-    "devDependencies": {
-        "@types/node": "7.0.11",
-        "@types/googlemaps":"3.26.7",
-        "concurrently": "3.4.0",
-        "lite-server": "2.3.0",
-        "typescript": "2.2.1"
-    }
+  "name": "angular-maps",
+  "version": "1.0.0",
+  "description": "Google Maps JavaScript API in Angular apps",
+  "author": "Roberto Simonetti",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robisim74/angular-maps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/robisim74/angular-maps/issues"
+  },
+  "homepage": "https://github.com/robisim74/angular-maps",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "5.0.0-beta.7",
+    "@angular/common": "5.0.0-beta.7",
+    "@angular/compiler": "5.0.0-beta.7",
+    "@angular/core": "5.0.0-beta.7",
+    "@angular/forms": "5.0.0-beta.7",
+    "@angular/http": "5.0.0-beta.7",
+    "@angular/platform-browser": "5.0.0-beta.7",
+    "@angular/platform-browser-dynamic": "5.0.0-beta.7",
+    "@angular/router": "5.0.0-beta.7",
+    "core-js": "2.5.1",
+    "rxjs": "5.4.3",
+    "zone.js": "0.8.17"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.4.2",
+    "@angular/compiler-cli": "5.0.0-beta.7",
+    "@angular/language-service": "5.0.0-beta.7",
+    "@types/jasmine": "2.6.0",
+    "@types/jasminewd2": "2.0.3",
+    "@types/node": "8.0.28",
+    "@types/googlemaps": "3.26.20",
+    "codelyzer": "3.2.0",
+    "jasmine-core": "2.8.0",
+    "jasmine-spec-reporter": "4.2.1",
+    "karma": "1.7.1",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-cli": "1.0.1",
+    "karma-coverage-istanbul-reporter": "1.3.0",
+    "karma-jasmine": "1.1.0",
+    "karma-jasmine-html-reporter": "0.2.2",
+    "protractor": "5.1.2",
+    "ts-node": "3.3.0",
+    "tslint": "5.7.0",
+    "typescript": "2.5.2"
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChange, ElementRef } from '@angular/core';
 
-import { MapsService } from '../services/maps.service';
+import { MapService } from '../services/map.service';
 
 @Component({
     selector: 'google-map',
@@ -9,7 +9,7 @@ import { MapsService } from '../services/maps.service';
         <ng-content></ng-content>
         `
 })
-export class GoogleMapDirective implements OnInit, OnChanges {
+export class GoogleMapComponent implements OnInit, OnChanges {
 
     /**
      * Center map. Required.
@@ -47,16 +47,16 @@ export class GoogleMapDirective implements OnInit, OnChanges {
     /**
      * Styles to apply to each of the default map types.
      */
-    @Input() styles: Array<google.maps.MapTypeStyle>;
+    @Input() styles: google.maps.MapTypeStyle[];
 
-    constructor(public maps: MapsService, private elementRef: ElementRef) { }
+    constructor(public map: MapService, private elementRef: ElementRef) { }
 
     /**
      * On init, creates map.
      */
-    ngOnInit() {
+    ngOnInit(): void {
         // Gets the map element.
-        let el: HTMLElement = this.elementRef.nativeElement.querySelector('#map');
+        const el: HTMLElement = this.elementRef.nativeElement.querySelector('#map');
 
         this.createMap(el);
     }
@@ -64,21 +64,21 @@ export class GoogleMapDirective implements OnInit, OnChanges {
     /**
      * On changes, updates center map & zoom.
      */
-    ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
-        if (changes['center']) { this.maps.setCenter(this.center); };
-        if (changes['zoom']) { this.maps.setZoom(this.zoom); };
+    ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
+        if (changes['center']) { this.map.setCenter(this.center); }
+        if (changes['zoom']) { this.map.setZoom(this.zoom); }
     }
 
-    private createMap(el: HTMLElement) {
-        this.maps.initMap(el, {
+    private createMap(el: HTMLElement): void {
+        this.map.initMap(el, {
             center: this.center,
             disableDefaultUI: this.disableDefaultUI,
             disableDoubleClickZoom: this.disableDoubleClickZoom,
             mapTypeId: this.mapTypeId,
-            maxZoom: <number>this.maxZoom,
-            minZoom: <number>this.minZoom,
+            maxZoom: this.maxZoom as number,
+            minZoom: this.minZoom as number,
             styles: this.styles,
-            zoom: <number>this.zoom
+            zoom: this.zoom as number
         });
     }
 

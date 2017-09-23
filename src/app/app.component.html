@@ -21,8 +21,8 @@
                 <google-map [center]="center" [zoom]="zoom" [disableDefaultUI]="disableDefaultUI" [disableDoubleClickZoom]="disableDoubleClickZoom"
                     [mapTypeId]="mapTypeId" [maxZoom]="maxZoom" [minZoom]="minZoom" [styles]="styles">
                     <!--this property is required: position-->
-                    <google-map-marker [position]="position" [title]="title" [content]="content">
-                    </google-map-marker>
+                    <div googleMapMarker [position]="position" [title]="title" [content]="content">
+                    </div>
                 </google-map>
 
                 <br>

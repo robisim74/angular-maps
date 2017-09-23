@@ -16,16 +16,16 @@ import { Observable } from 'rxjs/Observable';
 
     /**
      * Reverse geocoding by location.
-     * 
+     *
      * Wraps the Google Maps API geocoding service into an observable.
-     * 
+     *
      * @param latLng Location
      * @return An observable of GeocoderResult
      */
     geocode(latLng: google.maps.LatLng): Observable<google.maps.GeocoderResult[]> {
-        return new Observable((observer: Observer<google.maps.GeocoderResult[]>) => {
+        return Observable.create((observer: Observer<google.maps.GeocoderResult[]>) => {
             // Invokes geocode method of Google Maps API geocoding.
-            this.geocoder.geocode({ 'location': latLng }, (
+            this.geocoder.geocode({ location: latLng }, (
                 (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
                     if (status === google.maps.GeocoderStatus.OK) {
                         observer.next(results);
@@ -40,23 +40,26 @@ import { Observable } from 'rxjs/Observable';
     }
 
     /**
-     * Geocoding services.
-     * 
+     * Geocoding service.
+     *
      * Wraps the Google Maps API geocoding service into an observable.
-     * 
+     *
      * @param address The address to be searched
      * @return An observable of GeocoderResult
      */
     codeAddress(address: string): Observable<google.maps.GeocoderResult[]> {
-        return new Observable((observer: Observer<google.maps.GeocoderResult[]>) => {
+        return Observable.create((observer: Observer<google.maps.GeocoderResult[]>) => {
             // Invokes geocode method of Google Maps API geocoding.
-            this.geocoder.geocode({ 'address': address }, (
+            this.geocoder.geocode({ address: address }, (
                 (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
                     if (status === google.maps.GeocoderStatus.OK) {
                         observer.next(results);
                         observer.complete();
                     } else {
-                        console.log('Geocoding service: geocode was not successful for the following reason: ' + status);
+                        console.log(
+                            'Geocoding service: geocode was not successful for the following reason: '
+                            + status
+                        );
                         observer.error(status);
                     }
                 })

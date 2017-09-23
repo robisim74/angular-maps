@@ -1,9 +1,9 @@
 import { Directive, Input, OnChanges, SimpleChange } from '@angular/core';
 
-import { MapsService } from '../services/maps.service';
+import { MapService } from '../services/map.service';
 
 @Directive({
-    selector: 'google-map-marker'
+    selector: '[googleMapMarker]'
 })
 export class GoogleMapMarkerDirective implements OnChanges {
 
@@ -20,14 +20,14 @@ export class GoogleMapMarkerDirective implements OnChanges {
      */
     @Input() content: string;
 
-    constructor(public maps: MapsService) { }
+    constructor(public map: MapService) { }
 
     /**
      * This method is invoked when the marker properties change.
      */
-    ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
+    ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
         // Creates the marker and the info window.
-        if (changes['position']) { this.maps.addMarker(this.position, this.title, this.content); };
+        if (changes['position']) { this.map.addMarker(this.position, this.title, this.content); }
     }
 
 }

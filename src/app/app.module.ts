@@ -1,30 +1,28 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { GoogleMapDirective } from '../app/directives/google-map.directive';
+import { GoogleMapComponent } from '../app/components/google-map.component';
 import { GoogleMapMarkerDirective } from '../app/directives/google-map-marker.directive';
 
-import { MapsService } from '../app/services/maps.service';
+import { MapService } from '../app/services/map.service';
 import { GeolocationService } from '../app/services/geolocation.service';
 import { GeocodingService } from '../app/services/geocoding.service';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        CommonModule,
-        FormsModule
-    ],
     declarations: [
         AppComponent,
-        GoogleMapDirective,
+        GoogleMapComponent,
         GoogleMapMarkerDirective
     ],
+    imports: [
+        BrowserModule,
+        FormsModule
+    ],
     providers: [
-        MapsService,
+        MapService,
         GeolocationService,
         GeocodingService
     ],

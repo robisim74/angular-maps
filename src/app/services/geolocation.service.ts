@@ -9,17 +9,15 @@ import { Observable } from 'rxjs/Observable';
  */
 @Injectable() export class GeolocationService {
 
-    constructor() { }
-
     /**
      * Tries HTML5 geolocation.
-     * 
+     *
      * Wraps the Geolocation API into an observable.
-     * 
+     *
      * @return An observable of Position
      */
     getCurrentPosition(): Observable<Position> {
-        return new Observable((observer: Observer<Position>) => {
+        return Observable.create((observer: Observer<Position>) => {
             // Invokes getCurrentPosition method of Geolocation API.
             navigator.geolocation.getCurrentPosition(
                 (position: Position) => {
