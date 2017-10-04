@@ -18,11 +18,12 @@ import { Injectable } from '@angular/core';
      * @param el DIV element
      * @param mapOptions MapOptions object specification
      */
-    initMap(el: HTMLElement, mapOptions: any): void {
+    public initMap(el: HTMLElement, mapOptions: any): void {
         this.map = new google.maps.Map(el, mapOptions);
 
+        this.resize();
         // Adds event listener resize when the window changes size.
-        window.addEventListener("resize", () => { this.resize(); });
+        google.maps.event.addDomListener(window, "resize", () => this.resize());
     }
 
     setCenter(latLng: google.maps.LatLng): void {
@@ -82,13 +83,15 @@ import { Injectable } from '@angular/core';
         this.markers = [];
     }
 
-    private resize(): void {
+    public resize(): void {
         // Saves the center.
         const latLng: google.maps.LatLng = this.map.getCenter();
         // Triggers resize event.
-        google.maps.event.trigger(this.map, "resize");
-        // Restores the center.
-        this.map.setCenter(latLng);
+        setTimeout(() => {
+            google.maps.event.trigger(this.map, "resize");
+            // Restores the center.
+            this.map.setCenter(latLng);
+        });
     }
 
 }

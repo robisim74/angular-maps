@@ -115,7 +115,13 @@ export class AppComponent implements OnInit {
                             (results: google.maps.GeocoderResult[]) => {
                                 this.setMarker(this.center, "your locality", results[0].formatted_address);
                             })
-                            .then(() => console.log('Geocoding service: completed.'));
+                            .then(() => console.log('Geocoding service: completed.'))
+                            .catch((error: google.maps.GeocoderStatus) => {
+                                if (error === google.maps.GeocoderStatus.ZERO_RESULTS) {
+                                    this.message = "zero results";
+                                    this.warning = true;
+                                }
+                            });
                     }
                 },
                 (error: PositionError) => {
