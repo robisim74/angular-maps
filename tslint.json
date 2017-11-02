@@ -49,10 +49,6 @@
       true,
       "Directive"
     ],
-    "templates-use-public": true,
-    "no-access-missing-member": false,
-    "invoke-injectable": true,
-    "template-to-ng-template": true,
     "ban-types": false,
     "forin": false,
     "max-classes-per-file": [
